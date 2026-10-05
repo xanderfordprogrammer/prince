@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% from "_card.html" import card %}{% block content %}<h1>Find shops</h1>
+<form class="row" style="margin-bottom:1rem"><input name="q" value="{{term}}" placeholder="Search by shop name or area" style="flex:1"><button class="btn go">Search</button></form>
+<div class="two"><div class="grid" style="grid-template-columns:1fr">{% for s in shops %}{{ card(s) }}{% else %}<p>No shops match "{{term}}".</p>{% endfor %}</div>
+<div><div class="map">{% for s in shops %}<a class="pin {{s.cls}}" style="left:{{s.px}}%;top:{{s.py}}%" href="{{ url_for('shop_details', sid=s.id) }}">{{s.name}}</a>{% endfor %}</div>
+<p class="mute">Map placeholder. Pins use each shop's latitude/longitude, so a real map (Leaflet/Google) can be plugged in later.</p></div></div>{% endblock %}

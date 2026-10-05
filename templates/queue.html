@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}<h1 id="queue">My queue</h1>
+{% for r in queues if r.queue_status in ['Waiting','Called','In Service'] %}<div class="card" style="margin-bottom:1rem"><div class="row"><h2>Queue Number: {{r.queue_number}}</h2><span class="badge {{r.queue_status.split()[0]}} right">{{r.queue_status}}</span></div>
+<p>Shop: {{r.shop}}<br>Service: {{r.service_name}}<br>Motorcycle: {{r.bike}}<br>Customers Ahead: {{r.ahead}}<br>Estimated Wait: {{r.wait}}</p>
+{% if r.queue_status in ['Waiting','Called'] %}<form method="post" action="{{ url_for('cancel_queue', qid=r.id) }}"><button class="btn danger">Cancel Queue</button></form>{% endif %}</div>
+{% else %}<p class="mute">No active queue. <a href="{{ url_for('dashboard') }}">Find a shop</a> to join one.</p>{% endfor %}
+<h2 id="reservations" style="margin-top:1.5rem">Reservations</h2><div class="card scroll"><table><tr><th>No.</th><th>Shop</th><th>Service</th><th>Motorcycle</th><th>Date</th><th>Time</th><th>Status</th><th></th></tr>
+{% for r in reservations %}<tr><td>{{r.reservation_number}}</td><td>{{r.shop}}</td><td>{{r.service_name}}</td><td>{{r.bike}}</td><td>{{r.reservation_date}}</td><td>{{r.reservation_time}}</td><td><span class="badge {{r.status.split()[0]}}">{{r.status}}</span></td>
+<td>{% if r.status in ['Pending','Confirmed'] %}<form method="post" action="{{ url_for('cancel_reservation', rid=r.id) }}"><button class="btn sm danger">Cancel</button></form>{% endif %}</td></tr>
+{% else %}<tr><td colspan="8" class="mute">No reservations yet.</td></tr>{% endfor %}</table></div>
+<h2 style="margin-top:1.5rem">Queue history</h2><div class="card scroll"><table><tr><th>No.</th><th>Shop</th><th>Service</th><th>Motorcycle</th><th>Status</th><th>Joined</th></tr>
+{% for r in queues if r.queue_status in ['Completed','Cancelled'] %}<tr><td>{{r.queue_number}}</td><td>{{r.shop}}</td><td>{{r.service_name}}</td><td>{{r.bike}}</td><td><span class="badge {{r.queue_status}}">{{r.queue_status}}</span></td><td>{{r.created_at}}</td></tr>
+{% else %}<tr><td colspan="6" class="mute">No history yet.</td></tr>{% endfor %}</table></div>{% endblock %}

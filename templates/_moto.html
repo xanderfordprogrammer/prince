@@ -1,0 +1,5 @@
+<label>Service</label><select name="service_id" required>{% for v in services %}<option value="{{v.id}}" {{'selected' if pick==v.id}}>{{v.service_name}} - from ₱{{'%.0f'|format(v.base_price)}}</option>{% endfor %}</select>
+<div class="two" style="gap:.6rem;grid-template-columns:1fr 1fr"><div><label>Brand</label><select name="brand">{% for b in MODELS %}<option>{{b}}</option>{% endfor %}</select></div>
+<div><label>Model</label><select name="model"></select></div></div>
+<label>Motorcycle type</label><select name="motorcycle_type">{% for t in TYPE_MULT %}<option>{{t}}</option>{% endfor %}</select>
+<div class="est">Pick a service to see the estimated cost.</div>

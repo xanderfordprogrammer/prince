@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block content %}<h1>Services and pricing</h1><p class="mute">Prototype/example prices only. Final cost depends on motorcycle brand, model and type, parts, labor and repair complexity.</p>
+<form><select name="shop" onchange="this.form.submit()" style="max-width:300px">{% for x in shops %}<option value="{{x.id}}" {{'selected' if x.id==s.id}}>{{x.name}}</option>{% endfor %}</select></form>
+<div class="grid" style="margin:1rem 0">{% for v in services %}<div class="card"><h3>{{v.service_name}}</h3><div class="price">from ₱{{'%.0f'|format(v.base_price)}}</div><div class="mute">about {{v.estimated_duration}} min</div></div>{% endfor %}</div>
+<h2>Estimate your cost</h2><form class="card moto" style="max-width:560px" data-models='{{MODELS_JSON}}' data-types='{{TYPES_JSON}}'>{% include "_moto.html" %}
+<p><a class="btn go" href="{{ url_for('join_queue', sid=s.id) }}">Join Queue</a> <a class="btn" href="{{ url_for('reserve', shop_id=s.id) }}">Reserve</a></p></form>{% endblock %}

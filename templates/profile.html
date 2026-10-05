@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block content %}<h1>Profile</h1><div class="two"><form method="post" class="card"><label>Name</label><input name="name" value="{{user.name}}"><label>Email</label><input value="{{user.email}}" disabled>
+<label>Contact number</label><input name="contact_number" value="{{user.contact_number or ''}}"><p><button class="btn go">Save changes</button></p></form>
+<div class="card"><h3>My motorcycles</h3>{% for b in bikes %}<p>🏍️ {{b.brand}} {{b.model}} <span class="mute">({{b.motorcycle_type}})</span></p>{% else %}<p class="mute">Motorcycles you use when queueing or reserving appear here.</p>{% endfor %}</div></div>{% endblock %}

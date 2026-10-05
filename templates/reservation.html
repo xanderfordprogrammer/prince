@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}<h1>Reserve a service</h1>
+<form method="post" class="card moto" style="max-width:600px" data-models='{{MODELS_JSON}}' data-types='{{TYPES_JSON}}'>
+<label>Motorcycle shop</label><select onchange="location='?shop_id='+this.value">{% for x in shops %}<option value="{{x.id}}" {{'selected' if x.id==s.id}}>{{x.name}}</option>{% endfor %}</select><input type="hidden" name="shop_id" value="{{s.id}}">
+<label>Customer name</label><input name="name" value="{{user.name}}" required><label>Contact number</label><input name="contact" value="{{user.contact_number or ''}}" required>
+{% include "_moto.html" %}
+<div class="two" style="gap:.6rem;grid-template-columns:1fr 1fr"><div><label>Preferred date</label><input type="date" name="date" min="{{today}}" required></div>
+<div><label>Preferred time ({{s.hours}})</label><input type="time" name="time" min="{{s.opening_time}}" max="{{s.closing_time}}" required></div></div>
+<label>Additional concern</label><textarea name="concern" rows="3"></textarea><p><button class="btn go">Confirm reservation</button></p></form>{% endblock %}

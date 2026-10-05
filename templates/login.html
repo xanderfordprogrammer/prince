@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}<div class="auth"><section class="hero"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="FIND MY MECH"><p>See which motorcycle shops are least busy, then queue or reserve before you ride over.</p></section>
+<section class="form"><h2>Log in</h2>{% with m=get_flashed_messages(with_categories=true) %}{% for c,t in m %}<div class="flash {{c}}">{{t}}</div>{% endfor %}{% endwith %}
+<form method="post"><label>Email or username</label><input name="identity" required autofocus><label>Password</label><input type="password" name="password" required>
+<p><button class="btn go" style="width:100%">Log in</button></p></form><p><a href="{{ url_for('forgot') }}">Forgot password?</a> · <a href="{{ url_for('register') }}">Create account</a></p>
+<p class="mute">Demo: demo@findmymech.test / demo123<br>Shop owner: owner1@findmymech.test / admin123</p></section></div>{% endblock %}

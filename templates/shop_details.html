@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}<div class="row"><h1>{{s.name}}</h1><span class="badge {{s.cls}}">{{s.label}}</span></div>
+<p class="mute">📍 {{s.address}} · ☎ {{s.phone}} · 🕗 {{s.hours}} · ★ {{s.rating}}</p>
+<div class="stats"><div><strong>{{s.waiting}}</strong>in queue</div><div><strong>{{s.wait_text}}</strong>est. wait</div><div><strong>{{s.available_mechanics}}</strong>mechanics</div><div><strong>{{s.dist}} km</strong>away</div></div>
+<div class="row"><a class="btn go" href="{{ url_for('join_queue', sid=s.id) }}">Join Queue</a><a class="btn" href="{{ url_for('reserve', shop_id=s.id) }}">Make Reservation</a>
+<a class="btn ghost" href="#services">View Services</a><a class="btn ghost" target="_blank" rel="noopener" href="https://www.google.com/maps?q={{s.latitude}},{{s.longitude}}">View Location</a></div>
+<h2 id="services" style="margin-top:1.5rem">Services and prices</h2><p class="mute">Prototype prices. Actual cost depends on your motorcycle, parts and labor.</p>
+<div class="grid">{% for v in services %}<div class="card"><h3>{{v.service_name}}</h3><div class="price">from ₱{{'%.0f'|format(v.base_price)}}</div><div class="mute">about {{v.estimated_duration}} min</div>
+<p><a class="btn sm go" href="{{ url_for('join_queue', sid=s.id, service=v.id) }}">Queue</a> <a class="btn sm" href="{{ url_for('reserve', shop_id=s.id, service=v.id) }}">Reserve</a></p></div>{% endfor %}</div>{% endblock %}

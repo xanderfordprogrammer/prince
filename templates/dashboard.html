@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% from "_card.html" import card %}{% block content %}<h1>Welcome back, {{ user.name.split()[0] }}</h1>
+<p class="mute">Shops are sorted with the least busy first.</p><div class="hdr"><h2>Shops near you</h2></div><div class="grid">{% for s in shops %}{{ card(s) }}{% endfor %}</div>{% endblock %}

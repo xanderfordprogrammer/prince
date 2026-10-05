@@ -1,0 +1,6 @@
+{% macro card(s) %}<article class="card shop {{s.cls}}"><div class="row"><h3>{{s.name}}</h3><span class="badge {{s.cls}} right">{{s.label}}</span></div>
+<div class="mute">📍 {{s.address}} · {{s.dist}} km away</div>
+<div class="qbar {{s.cls}}" title="{{s.waiting}} waiting">{% for i in range(8) %}<i class="{{'on' if i < s.waiting else ''}}"></i>{% endfor %}</div><div class="stats"><div><strong>{{s.waiting}}</strong>waiting</div><div><strong>{{s.wait_text}}</strong>est. wait</div><div><strong>★ {{s.rating}}</strong>rating</div></div>
+<div class="mute">🕗 Open {{s.hours}}</div>
+<div class="row" style="margin-top:.8rem"><a class="btn ghost" href="{{ url_for('shop_details', sid=s.id) }}">View Shop</a>
+<a class="btn go" href="{{ url_for('join_queue', sid=s.id) }}">Join Queue</a><a class="btn" href="{{ url_for('reserve', shop_id=s.id) }}">Reserve</a></div></article>{% endmacro %}

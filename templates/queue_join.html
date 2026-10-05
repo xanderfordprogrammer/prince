@@ -1,0 +1,2 @@
+{% extends "base.html" %}{% block content %}<h1>Join the queue</h1><p><strong>{{s.name}}</strong> · {{s.waiting}} waiting · est. wait {{s.wait_text}}</p>
+<form method="post" class="card moto" style="max-width:560px" data-models='{{MODELS_JSON}}' data-types='{{TYPES_JSON}}'>{% include "_moto.html" %}<p><button class="btn go">Join Queue</button> <a class="btn ghost" href="{{ url_for('shop_details', sid=s.id) }}">Back</a></p></form>{% endblock %}

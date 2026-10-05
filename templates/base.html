@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}FIND MY MECH{% endblock %}</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}"><link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"></head><body>
+{% if user %}<nav><div class="wrap"><a class="brand" href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="">FIND MY <b>MECH</b></a><button id="burger" aria-label="Menu">☰</button>
+<div class="links">{% if user.role=='admin' %}<a href="{{ url_for('admin') }}">Shop dashboard</a>{% else %}
+<a href="{{ url_for('dashboard') }}">Home</a><a href="{{ url_for('shops') }}">Find Shops</a><a href="{{ url_for('my_activity') }}">My Queue</a>
+<a href="{{ url_for('my_activity') }}#reservations">Reservations</a><a href="{{ url_for('services') }}">Services</a><a href="{{ url_for('profile') }}">Profile</a>{% endif %}
+<a href="{{ url_for('logout') }}">Logout</a></div></div></nav>{% endif %}
+{% block body %}<main class="wrap">{% with m=get_flashed_messages(with_categories=true) %}{% for c,t in m %}<div class="flash {{c}}">{{t}}</div>{% endfor %}{% endwith %}
+{% block content %}{% endblock %}</main>{% endblock %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script></body></html>
